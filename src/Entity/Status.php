@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\StatusRepository")
@@ -20,6 +21,7 @@ class Status
 
     /**
      * @ORM\Column(type="string", length=15)
+     * @Assert\NotBlank(message="Merci de saisir un nom")
      */
     private $name;
 
@@ -116,5 +118,10 @@ class Status
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

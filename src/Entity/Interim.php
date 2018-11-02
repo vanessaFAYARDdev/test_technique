@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,16 +21,20 @@ class Interim
 
     /**
      * @ORM\Column(type="string", length=30)
+     * @Assert\NotBlank(message="Merci de saisir un prénom")
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=30)
+     * @Assert\NotBlank(message="Merci de saisir un nom")
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=5)
+     * @Assert\NotBlank(message="Merci de saisir un code postal")
+     * @Assert\Regex("\d{2}[ ]?\d{3}")
      */
     private $zipCode;
 
@@ -81,6 +86,12 @@ class Interim
         $this->lastName = $lastName;
 
         return $this;
+    }
+
+    public function getName(): ?string
+    {
+        $name = $this->firstName . ' ' . $this->lastName;
+        return $name;
     }
 
     public function getZipCode(): ?string
@@ -167,5 +178,11 @@ class Interim
         }
 
         return $this;
+    }
+
+    public function __toString(): ?string
+    {
+        $name = $this->lastName . $this->firstName;
+        return $name;
     }
 }

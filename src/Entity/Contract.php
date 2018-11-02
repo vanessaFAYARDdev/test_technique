@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ContractRepository")
@@ -18,23 +19,29 @@ class Contract
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\NotBlank()
+     * @Assert\DateTime()
      */
     private $startAt;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\NotBlank()
+     * @Assert\DateTime()
      */
     private $endAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Interim", inversedBy="contracts")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank()
      */
     private $interim;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Status", inversedBy="contracts")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank()
      */
     private $status;
 

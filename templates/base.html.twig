@@ -1,12 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="FR-fr">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <meta name="description" content="Application gestion intérimaire">
+        <meta name="keywords" content="application symfony">
+        <meta name="author" content="Vanessa FAYARD">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Interim Application{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="icon" type="image/png" href="img/favicon_vf.png">
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous"> <!--Font icon-->
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" rel="stylesheet"> <!--normalise css-->
+            <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet"> <!-- bootstrap bootswatch cerulean  -->
+            <link href="{{ asset('css/base.css') }}" rel="stylesheet">
+        {% endblock %}
+        {% block scripts %}
+        {% endblock %}
+
     </head>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{{ path('contract') }}">Contrats</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor03">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('contract_add') }}">Ajouter contrat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Statistiques</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block body %}
+
+        {% endblock %}
+
+        <footer class="footer">
+            <p>Application réalisé par Vanessa FAYARD</p>
+        </footer>
+        {% block javascripts %}
+            <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+        {% endblock %}
     </body>
 </html>

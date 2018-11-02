@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MissionTrackingRepository")
@@ -18,6 +19,13 @@ class MissionTracking
 
     /**
      * @ORM\Column(type="smallint")
+     * @Assert\NotBlank(message="Merci de saisir une note")
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 10,
+     *      minMessage = "la note doit être supérieur à {{ limit }}",
+     *      maxMessage = "la note doit être inférieur à {{ limit }}"
+     * )
      */
     private $score;
 

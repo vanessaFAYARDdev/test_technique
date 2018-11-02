@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/form.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<section class="section-form">
+    <h1>Créer/modifier un contrat</h1>
+
+    {{ form_start(formContract) }}
+
+    {{ form_widget(formContract) }}
+
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Enregistrer">
+        <a href="{{ path('contract') }}" class="btn btn-danger">Annuler</a>
+    </div>
+
+    {{ form_end(formContract) }}
+
+</section>
+
+{% endblock %}
+
