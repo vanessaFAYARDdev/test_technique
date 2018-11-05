@@ -15,6 +15,7 @@
             <link href="{{ asset('css/base.css') }}" rel="stylesheet">
         {% endblock %}
         {% block scripts %}
+            <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
         {% endblock %}
 
     </head>
@@ -35,6 +36,15 @@
                 </ul>
             </div>
         </nav>
+       {% for label, messages in app.flashes %}
+           <div>
+               <div class="alert alert-{{ label }}">
+                   {% for message in messages %}
+                       <p>{{ message|raw }}</p>
+                   {% endfor %}
+               </div>
+           </div>
+        {% endfor %}
     </header>
     <body>
         {% block body %}
@@ -45,7 +55,7 @@
             <p>Application réalisé par Vanessa FAYARD</p>
         </footer>
         {% block javascripts %}
-            <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+            <script src="{{ asset('js/main.js') }}"></script>
         {% endblock %}
     </body>
 </html>

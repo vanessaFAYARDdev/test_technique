@@ -12,7 +12,13 @@
                 <p class="card-text">date de fin : {{ contract.endAt|date("m/d/Y") }}</p>
                 <p class="card-text">Statut du contrat : {{ contract.status.name }}</p>
                 <a href="{{ path('contract_edit', { 'id': contract.id }) }}" class="btn btn-info">  <i class="fas fa-edit"></i> Editer</a>
-                <a href="{{ path('contract_delete', { 'id': contract.id }) }}" class="btn btn-danger">  <i class="fas fa-edit"></i> Supprimer</a>
+                <a href="{{ path('contract_delete', { 'id': contract.id }) }}" class="btn btn-danger" id="delete">  <i class="fas fa-trash"></i> Supprimer</a>
+
+                {% if contract.missionTracking %}
+                    <a href="{{ path('missionTracking_show', { 'id': contract.missionTracking.id }) }}" class="btn btn-light">  <i class="fas fa-edit"></i> Voir suivi de mission n°{{ contract.missionTracking.id }}</a>
+                {% else %}
+                    <a href="{{ path('missionTracking_add', { 'id': contract.id }) }}" class="btn btn-success">  <i class="fas fa-plus"></i> Ajouter mission de suivi</a>
+                {% endif %}
             </div>
         </div>
         {% endfor %}

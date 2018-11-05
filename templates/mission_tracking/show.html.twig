@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <section class="container">
+        <div class="card border-light">
+            <h2 class="card-header">Mission de suivi du contrat n°{{ missionTracking.contract.id }}</h2>
+            <div class="card-body">
+                <p>{{ missionTracking.interim.firstName }} {{ missionTracking.interim.lastName }}</p>
+                <p>Note : {{ missionTracking.score }}/10</p>
+                <p>Contrat du {{ missionTracking.contract.startAt|date("m/d/Y") }} au {{ missionTracking.contract.endAt|date("m/d/Y") }}</p>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
+

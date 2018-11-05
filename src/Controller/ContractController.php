@@ -7,19 +7,11 @@ use App\Entity\Interim;
 use App\Form\ContractFormType;
 use App\Repository\ContractRepository;
 use App\Repository\InterimRepository;
+use App\Repository\MissionTrackingRepository;
 use Doctrine\Common\Persistence\ObjectManager;
-use http\Env\Response;
-use PUGX\AutocompleterBundle\Form\Type\AutocompleteType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ContractController extends AbstractController
@@ -27,14 +19,16 @@ class ContractController extends AbstractController
     /**
      * @Route("/", name="contract")
      */
-    public function index(ContractRepository $contractRepository, InterimRepository $interimRepository)
+    public function index(ContractRepository $contractRepository, InterimRepository $interimRepository, MissionTrackingRepository $missionTrackingRepository)
     {
         $contracts = $contractRepository->findAll();
         $interims = $interimRepository->findAll();
+        $missionTracking = $missionTrackingRepository->findAll();
 
         return $this->render('contract/index.html.twig', [
             'contracts' => $contracts,
-            'interims' => $interims
+            'interims' => $interims,
+            'missionTracking' => $missionTracking
         ]);
     }
 
@@ -59,6 +53,12 @@ class ContractController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             $objectManager->persist($contract);
             $objectManager->flush();
+
+            $this->addFlash(
+                'success',
+                "Le contrat <strong>{$contract->getId()}</strong> a bien été enregistré"
+            );
+
             return $this->redirectToRoute('contract');
         }
 
@@ -78,8 +78,15 @@ class ContractController extends AbstractController
         $objectManager->remove($contract);
         $objectManager->flush();
 
+        $this->addFlash(
+            'success',
+            "Le contrat <strong>{$contract->getId()}</strong> a bien été supprimé"
+        );
+
         return $this->redirectToRoute('contract');
     }
+
+
 
 
 
