@@ -30,10 +30,7 @@ class MissionTrackingController extends AbstractController
     {
         $missionTracking = new MissionTracking();
 
-        $contract = $contractRepository->findById($id);
-        $contract = $contract['0'];
-
-        dump($contract);
+        $contract = $contractRepository->findOneById($id);
 
         $errors = [];
 
@@ -102,11 +99,9 @@ class MissionTrackingController extends AbstractController
     /**
      * @Route("/suivi-mission/{id}", name="missionTracking_show")
      */
-    public function show(MissionTrackingRepository $missionTrackingRepository)
+    public function show(MissionTrackingRepository $missionTrackingRepository, $id)
     {
-        $missionTracking = $missionTrackingRepository->findAll();
-        $missionTracking = $missionTracking['0'];
-
+        $missionTracking = $missionTrackingRepository->findOneById($id);
 
         return $this->render('mission_tracking/show.html.twig', [
             'missionTracking' => $missionTracking

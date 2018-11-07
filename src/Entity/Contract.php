@@ -20,14 +20,14 @@ class Contract
     /**
      * @ORM\Column(type="datetime")
      * @Assert\NotBlank()
-     * @Assert\DateTime()
+     * @Assert\Date()
      */
     private $startAt;
 
     /**
      * @ORM\Column(type="datetime")
      * @Assert\NotBlank()
-     * @Assert\DateTime()
+     * @Assert\Date()
      */
     private $endAt;
 

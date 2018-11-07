@@ -22,7 +22,6 @@ class ContractRepository extends ServiceEntityRepository
     /**
      * @return Contract[] Returns an array of Contract objects
      */
-
     public function findById($value)
     {
         return $this->createQueryBuilder('i')
@@ -33,15 +32,37 @@ class ContractRepository extends ServiceEntityRepository
         ;
     }
 
-    /*
-    public function findOneBySomeField($value): ?Contract
+
+    public function findOneById($value): ?Contract
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
+            ->andWhere('c.id = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
+
+    /**
+     * @return [] Returns an array of data objects
+     */
+    public function findAllInTimePeriod($date1, $date2)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT contract.id, contract.start_at, contract.end_at, interim.last_name, interim.first_name, interim.zip_code, `status`.`name`
+            FROM contract
+            INNER JOIN interim ON interim.id = contract.interim_id
+            INNER JOIN `status` ON `status`.`id` = contract.status_id
+            WHERE contract.start_at >= :date1
+            AND contract.end_at <= :date2
+            ';
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['date1' => $date1, 'date2' => $date2]);
+
+        return $stmt->fetchAll();
+    }
+
 }

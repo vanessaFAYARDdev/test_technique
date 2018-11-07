@@ -53,6 +53,12 @@ class Interim
      */
     private $missionTrackings;
 
+    /**
+     * @ORM\Column(type="string", length=130, nullable=true)
+     */
+    private $mail;
+
+
     public function __construct()
     {
         $this->contracts = new ArrayCollection();
@@ -184,5 +190,17 @@ class Interim
     {
         $name = $this->lastName . $this->firstName;
         return $name;
+    }
+
+    public function getMail(): ?string
+    {
+        return $this->mail;
+    }
+
+    public function setMail(?string $mail): self
+    {
+        $this->mail = $mail;
+
+        return $this;
     }
 }

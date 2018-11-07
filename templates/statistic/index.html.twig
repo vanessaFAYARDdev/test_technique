@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/form.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <section class="section-form">
+        <h1>Exporter statistiques contrat en format CSV</h1>
+
+        {{ form_start(formStatistic) }}
+
+        {{ form_widget(formStatistic) }}
+
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="Envoyer">
+            <a href="{{ path('contract') }}" class="btn btn-danger">Annuler</a>
+        </div>
+
+        {{ form_end(formStatistic) }}
+
+        {% if request %}
+            <div class="card border-light">
+                <p class="card-body text-center">
+                    Pour la période du
+                    <strong>{{ request.startAt.month }}/{{ request.startAt.day }}/{{ request.startAt.year }}</strong>
+                    au
+                    <strong>{{ request.endAt.month }}/{{ request.endAt.day }}/{{ request.endAt.year }}</strong>
+                </p>
+            </div>
+        {% endif %}
+
+    </section>
+
+{% endblock %}
