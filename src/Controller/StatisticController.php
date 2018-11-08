@@ -3,14 +3,11 @@
 namespace App\Controller;
 
 use App\Command\ExportCvsCommand;
-use App\Entity\Interim;
 use App\Repository\ContractRepository;
 use App\Repository\InterimRepository;
-use Doctrine\DBAL\Query\QueryBuilder;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 class StatisticController extends AbstractController

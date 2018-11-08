@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Contract;
-use App\Entity\Interim;
 use App\Form\ContractFormType;
 use App\Repository\ContractRepository;
 use App\Repository\InterimRepository;
